@@ -1,46 +1,81 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { Environment } from './data/environments'
+import { defineComponent, ref } from 'vue'
+import { Environment, EnvironmentImage } from './data/environments'
 
 export default defineComponent({
   setup() {
+    const selectedEnvironment = ref<Environment>(Environment.Forest)
     return {
       environments: Environment,
+      environmentImages: EnvironmentImage,
+      selectedEnvironment,
     }
   },
 })
 </script>
 
 <template>
-  <div class="p-6">
-    <h1>Encounter Generator</h1>
-
-    <form>
-      <fieldset class="flex">
-        <div v-for="(name, id) in environments" :key="id" class="group">
-          <input
-            type="radio"
-            :value="id"
-            :id="`environment-${id}`"
-            name="environment"
-            class="peer appearance-none"
-          />
-          <label
-            :for="`environment-${id}`"
-            class="
-              group-first-of-type:rounded-l
-              group-last-of-type:rounded-r
-              bg-gray-100
-              text-gray-800
-              peer-checked:bg-indigo-700 peer-checked:text-indigo-50
-              px-4
-              py-2
-              block
-            "
-            >{{ name }}</label
+  <div
+    class="relative p-6 bg-gray-900 h-screen flex justify-center text-gray-300"
+  >
+    <img
+      :src="environmentImages[selectedEnvironment]"
+      class="absolute top-0 left-0 w-full h-full object-cover opacity-10"
+    />
+    <div>
+      <h1 class="mb-5 text-indigo-300">Encounter Generator</h1>
+      <form>
+        <fieldset class="flex gap-1">
+          <legend class="mb-2">Choose your environment:</legend>
+          <div
+            v-for="(id, name) in environments"
+            :key="id"
+            class="group relative w-40 h-40 bg-right-top bg-cover"
+            :style="{
+              backgroundImage: `url('${environmentImages[id]}')`,
+            }"
           >
-        </div>
-      </fieldset>
-    </form>
+            <label
+              :for="`environment-${id}`"
+              class="
+                text-indigo-100 text-lg
+                font-medium
+                tracking-wider
+                h-full
+                w-full
+                flex
+                items-center
+                justify-center
+                relative
+                z-10
+                cursor-pointer
+              "
+              >{{ name }}</label
+            >
+            <input
+              type="radio"
+              :value="id"
+              :id="`environment-${id}`"
+              name="environment"
+              class="peer appearance-none"
+              v-model="selectedEnvironment"
+            />
+            <div
+              class="
+                absolute
+                top-0
+                left-0
+                h-full
+                w-full
+                bg-indigo-800
+                opacity-70
+                group-hover:opacity-60
+                peer-checked:opacity-40
+              "
+            />
+          </div>
+        </fieldset>
+      </form>
+    </div>
   </div>
 </template>
