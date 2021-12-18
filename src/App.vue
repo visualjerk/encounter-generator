@@ -20,7 +20,7 @@ export default defineComponent({
   >
     <img
       :src="environmentImages[selectedEnvironment]"
-      class="absolute top-0 left-0 w-full h-full object-cover opacity-10"
+      class="absolute top-0 left-0 w-full h-full object-cover opacity-20"
     />
     <div>
       <h1 class="mb-10 text-indigo-400">
@@ -31,7 +31,7 @@ export default defineComponent({
       </h1>
       <form>
         <fieldset>
-          <legend class="mb-2 text-lg tracking-wide text-center capitalize">
+          <legend class="mb-3 text-sm tracking-wide text-center capitalize">
             Choose your environment
           </legend>
           <div class="flex gap-1 bg-indigo-200 p-1">
@@ -43,6 +43,14 @@ export default defineComponent({
                 backgroundImage: `url('${environmentImages[id]}')`,
               }"
             >
+              <input
+                type="radio"
+                :value="id"
+                :id="`environment-${id}`"
+                name="environment"
+                class="peer appearance-none absolute"
+                v-model="selectedEnvironment"
+              />
               <label
                 :for="`environment-${id}`"
                 class="
@@ -58,30 +66,12 @@ export default defineComponent({
                   z-10
                   cursor-pointer
                   drop-shadow-lg
+                  bg-indigo-800 bg-opacity-80
+                  group-hover:bg-opacity-50
+                  peer-checked:bg-opacity-20
                 "
                 >{{ name }}</label
               >
-              <input
-                type="radio"
-                :value="id"
-                :id="`environment-${id}`"
-                name="environment"
-                class="peer appearance-none"
-                v-model="selectedEnvironment"
-              />
-              <div
-                class="
-                  absolute
-                  top-0
-                  left-0
-                  h-full
-                  w-full
-                  bg-indigo-800
-                  opacity-70
-                  group-hover:opacity-60
-                  peer-checked:opacity-40
-                "
-              />
             </div>
           </div>
         </fieldset>
