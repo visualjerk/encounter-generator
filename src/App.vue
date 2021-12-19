@@ -16,13 +16,36 @@ export default defineComponent({
 
 <template>
   <div
-    class="relative p-6 bg-gray-900 h-screen flex justify-center text-gray-300"
+    class="
+      relative
+      p-6
+      bg-gray-900
+      h-screen
+      flex
+      justify-center
+      text-gray-300
+      overflow-hidden
+    "
   >
-    <img
-      :src="environmentImages[selectedEnvironment]"
-      class="absolute top-0 left-0 w-full h-full object-cover opacity-20"
-    />
-    <div>
+    <template v-for="id in environments" :key="id">
+      <img
+        :src="environmentImages[id]"
+        class="
+          absolute
+          top-0
+          left-0
+          w-full
+          h-full
+          object-cover
+          transition-all
+          duration-1000
+        "
+        :class="[
+          id === selectedEnvironment ? 'opacity-70 scale-110' : 'opacity-0',
+        ]"
+      />
+    </template>
+    <div class="relative">
       <h1 class="mb-10 text-indigo-400">
         <span class="font-extrabold text-indigo-300 uppercase">
           Encounter
@@ -66,6 +89,7 @@ export default defineComponent({
                   z-10
                   cursor-pointer
                   drop-shadow-lg
+                  transition-all
                   bg-indigo-800 bg-opacity-80
                   group-hover:bg-opacity-50
                   peer-checked:bg-opacity-20
