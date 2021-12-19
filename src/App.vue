@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import { Environment, EnvironmentImage } from './data/environments'
 
 export default defineComponent({
@@ -15,6 +15,26 @@ export default defineComponent({
 </script>
 
 <template>
+  <svg class="hidden">
+    <defs>
+      <filter id="distortion-filter">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.2 0.2"
+          numOctaves="5"
+          seed="2"
+          result="noise"
+        ></feTurbulence>
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="warp"
+          scale="3"
+          xChannelSelector="R"
+          yChannelSelector="B"
+        ></feDisplacementMap>
+      </filter>
+    </defs>
+  </svg>
   <div
     class="
       relative
@@ -25,7 +45,29 @@ export default defineComponent({
       text-gray-200
     "
   >
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+    <div
+      class="
+        absolute
+        top-0
+        left-0
+        w-full
+        h-full
+        overflow-hidden
+        before:block
+        before:absolute
+        before:z-10
+        before:inset-1
+        before:border
+        before:filter-distort
+        before:border-black
+        after:block
+        after:absolute
+        after:inset-2
+        after:border-2
+        after:filter-distort
+        after:border-black
+      "
+    >
       <img
         v-for="id in environments"
         :key="id"
@@ -100,7 +142,6 @@ export default defineComponent({
                   drop-shadow-lg
                   transition-all
                   duration-500
-                  border-2 border-indigo-400
                   bg-indigo-800 bg-opacity-80
                   group-hover:bg-opacity-50
                   peer-checked:text-pink-200
@@ -108,16 +149,26 @@ export default defineComponent({
                   peer-checked:bg-opacity-60
                   peer-checked:scale-110
                   peer-checked:border-pink-500
+                  before:block
+                  before:absolute
+                  before:inset-0
+                  before:border-2
+                  before:filter-distort
+                  before:border-indigo-400
+                  peer-checked:before:border-pink-500
                   after:transition-all
                   after:duration-1000
                   after:block
                   after:absolute
                   after:inset-0
                   after:border
+                  after:filter-distort
                   after:border-pink-300
-                  after:scale-75
+                  after:scale-50
                   after:opacity-0
-                  peer-checked:after:scale-90 peer-checked:after:opacity-100
+                  peer-checked:after:scale-75
+                  peer-checked:after:rotate-45
+                  peer-checked:after:opacity-100
                 "
                 >{{ name }}</label
               >
