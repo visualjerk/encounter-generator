@@ -18,17 +18,17 @@ export default defineComponent({
   <div
     class="
       relative
-      p-6
       bg-gray-900
       h-screen
-      flex
-      justify-center
+      flex flex-col
+      items-center
       text-gray-200
-      overflow-hidden
     "
   >
-    <template v-for="id in environments" :key="id">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
       <img
+        v-for="id in environments"
+        :key="id"
         :src="environmentImages[id]"
         class="
           absolute
@@ -44,20 +44,29 @@ export default defineComponent({
           id === selectedEnvironment ? 'opacity-40 scale-110' : 'opacity-0',
         ]"
       />
-    </template>
-    <div class="relative">
-      <h1 class="mb-10 text-indigo-400">
-        <span class="font-extrabold text-indigo-300 uppercase">
-          Encounter
-        </span>
-        <span class="tracking-wide">Generator</span>
+    </div>
+    <header class="relative flex w-full p-6 mb-10">
+      <h1>
+        <span class="font-extrabold text-pink-300 uppercase"> Encounter </span>
+        <span class="tracking-wide text-pink-400">Generator</span>
       </h1>
+    </header>
+    <div class="relative">
       <form>
         <fieldset>
-          <legend class="mb-3 text-2xl tracking-wide text-center capitalize">
+          <legend
+            class="
+              mb-4
+              text-2xl
+              tracking-wide
+              text-center
+              capitalize
+              font-light
+            "
+          >
             Choose your environment
           </legend>
-          <div class="flex gap-4 p-1">
+          <div class="flex flex-wrap justify-center gap-4 p-1">
             <div
               v-for="(id, name) in environments"
               :key="id"
@@ -78,7 +87,7 @@ export default defineComponent({
                 :for="`environment-${id}`"
                 class="
                   text-indigo-100 text-lg
-                  font-medium
+                  font-bold
                   tracking-wider
                   h-full
                   w-full
@@ -93,7 +102,7 @@ export default defineComponent({
                   border-2 border-indigo-400
                   bg-indigo-800 bg-opacity-80
                   group-hover:bg-opacity-50
-                  peer-checked:text-pink-100
+                  peer-checked:text-pink-200
                   peer-checked:bg-pink-800
                   peer-checked:bg-opacity-60
                   peer-checked:scale-110
