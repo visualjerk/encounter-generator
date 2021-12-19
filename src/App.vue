@@ -23,7 +23,7 @@ export default defineComponent({
       h-screen
       flex
       justify-center
-      text-gray-300
+      text-gray-200
       overflow-hidden
     "
   >
@@ -54,10 +54,10 @@ export default defineComponent({
       </h1>
       <form>
         <fieldset>
-          <legend class="mb-3 text-sm tracking-wide text-center capitalize">
+          <legend class="mb-3 text-2xl tracking-wide text-center capitalize">
             Choose your environment
           </legend>
-          <div class="flex gap-1 bg-indigo-200 p-1">
+          <div class="flex gap-4 p-1">
             <div
               v-for="(id, name) in environments"
               :key="id"
@@ -90,9 +90,14 @@ export default defineComponent({
                   cursor-pointer
                   drop-shadow-lg
                   transition-all
+                  border-2 border-indigo-400
                   bg-indigo-800 bg-opacity-80
                   group-hover:bg-opacity-50
-                  peer-checked:bg-opacity-20
+                  peer-checked:text-pink-100
+                  peer-checked:bg-pink-800
+                  peer-checked:bg-opacity-60
+                  peer-checked:scale-110
+                  peer-checked:border-pink-500
                 "
                 >{{ name }}</label
               >
