@@ -41,7 +41,7 @@ export default defineComponent({
           duration-1000
         "
         :class="[
-          id === selectedEnvironment ? 'opacity-70 scale-110' : 'opacity-0',
+          id === selectedEnvironment ? 'opacity-40 scale-110' : 'opacity-0',
         ]"
       />
     </template>
