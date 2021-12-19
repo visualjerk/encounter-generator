@@ -41,7 +41,7 @@ export default defineComponent({
           duration-1000
         "
         :class="[
-          id === selectedEnvironment ? 'opacity-40 scale-110' : 'opacity-0',
+          id === selectedEnvironment ? 'opacity-40 scale-105' : 'opacity-0',
         ]"
       />
     </div>
@@ -70,7 +70,7 @@ export default defineComponent({
             <div
               v-for="(id, name) in environments"
               :key="id"
-              class="group relative w-40 h-40 bg-right-top bg-cover"
+              class="group relative w-40 h-40 bg-right-top bg-cover shadow-xl"
               :style="{
                 backgroundImage: `url('${environmentImages[id]}')`,
               }"
@@ -99,6 +99,7 @@ export default defineComponent({
                   cursor-pointer
                   drop-shadow-lg
                   transition-all
+                  duration-500
                   border-2 border-indigo-400
                   bg-indigo-800 bg-opacity-80
                   group-hover:bg-opacity-50
@@ -107,6 +108,16 @@ export default defineComponent({
                   peer-checked:bg-opacity-60
                   peer-checked:scale-110
                   peer-checked:border-pink-500
+                  after:transition-all
+                  after:duration-1000
+                  after:block
+                  after:absolute
+                  after:inset-0
+                  after:border
+                  after:border-pink-300
+                  after:scale-75
+                  after:opacity-0
+                  peer-checked:after:scale-90 peer-checked:after:opacity-100
                 "
                 >{{ name }}</label
               >
