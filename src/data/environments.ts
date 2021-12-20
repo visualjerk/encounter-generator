@@ -6,8 +6,8 @@ export enum Environment {
 }
 
 export const EnvironmentImage = {
-  [Environment.Forest]: './images/forest.jpg',
-  [Environment.Mountain]: './images/mountain.jpg',
-  [Environment.Plain]: './images/forest.jpg',
-  [Environment.City]: './images/forest.jpg',
+  [Environment.Forest]: './images/forest-cover.jpg',
+  [Environment.Mountain]: './images/mountain-cover.jpg',
+  [Environment.Plain]: './images/plain-cover.jpg',
+  [Environment.City]: './images/city-cover.jpg',
 }
